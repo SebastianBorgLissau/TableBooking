@@ -1,0 +1,15 @@
+
+.login-page {
+    width: 50%;
+    margin: 20% 30% 10% 25%;
+    padding: 10%, 0, 0;
+}
+
+.form {
+    position: relative;
+    z-index: 1;
+    background: whitesmoke;
+    margin: auto;
+    padding: 10%;
+    text-align: center;
+}
