@@ -1,2 +1,1 @@
-/*test*/
-this.username = document.getElementById('username');
+//User Class
