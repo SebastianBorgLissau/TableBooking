@@ -8,6 +8,6 @@ Use cases here:
 Requirements here:
 
 
-Class diagram here:
+
 
 ![Alt text](assets/classdiagram.png?raw=true "tableBooking UML Class Diagram")
