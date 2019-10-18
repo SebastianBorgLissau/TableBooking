@@ -6,14 +6,33 @@
 </head>
 <body>
 
-<form action="" method="get">
-<fieldset>
-    <legend>Booking Detaljer </legend>
-    <input type="date" name="date" min="2019-10-14">
-    <input type="number" name="NumberOfGuests" min="1" max="8"
 
-</fieldset>
+
+
+
+</form name="findTable" onsubmit="return findAvaliableTable()" method="get">
+
+Hvor mange pladser skal i bruge?
+
+<br>
+
+<select type ="text" id="antal_pladser">
+    <option value="1">1 plads</option>  
+    <option value="2">2 pladser</option>  
+    <option value="3">3 pladser</option>  
+    <option value="4">4 pladser</option>
+    <option value="5">5 pladser</option>
+    <option value="6">6 pladser</option>
+    <option value="7">7 pladser</option>
+    <option value="8">8 pladser</option>
+</select>
+
+<br/>
+<!-- Submit button to activate some function -->
+<button type="submit" style="cursor: pointer;">Submit</button>
 </form>
+
+<script type="application/x-javascript" src="Table.js"></script>
 
 </body>
 </html>
