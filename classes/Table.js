@@ -43,8 +43,7 @@ var allTables = [
 //Sort funktion som sammenligner tal a og b og finder det mindste til det største.
 console.log(allTables.sort(function(a, b){return a - b}));
 
-function findAvaliableTable() {
-
+function FindAvaliableTable() {
     var antalpladser = document.getElementById('antal_pladser').value;
 
     alert(antalpladser);

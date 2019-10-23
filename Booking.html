@@ -10,7 +10,7 @@
 
 
 
-</form name="findTable" onsubmit="return findAvaliableTable()" method="get">
+</form name="findTable" onsubmit="FindAvaliableTable()" method="get">
 
 Hvor mange pladser skal i bruge?
 
@@ -29,7 +29,7 @@ Hvor mange pladser skal i bruge?
 
 <br/>
 <!-- Submit button to activate some function -->
-<button type="submit" style="cursor: pointer;">Submit</button>
+<button type="submit" onclick="return FindAvaliableTable()" method="get" style="cursor: pointer;">Submit</button>
 </form>
 
 <script type="application/x-javascript" src="Table.js"></script>
