@@ -5,18 +5,12 @@
     <title>Bestil Bord!</title>
 </head>
 <body>
+<h1>Velkommen til booking-siden!</h1>
+
+<p>Hvor mange pladser skal i bruge?<p>
 
 
-
-
-
-</form name="findTable" onsubmit="FindAvaliableTable()" method="get">
-
-Hvor mange pladser skal i bruge?
-
-<br>
-
-<select type ="text" id="antal_pladser">
+<select id="seats">
     <option value="1">1 plads</option>  
     <option value="2">2 pladser</option>  
     <option value="3">3 pladser</option>  
@@ -27,12 +21,10 @@ Hvor mange pladser skal i bruge?
     <option value="8">8 pladser</option>
 </select>
 
-<br/>
-<!-- Submit button to activate some function -->
-<button type="submit" onclick="return FindAvaliableTable()" method="get" style="cursor: pointer;">Submit</button>
-</form>
+    <button onclick="findAntalPersoner()">Submit</button>
 
-<script type="application/x-javascript" src="Table.js"></script>
 
+</select>
+<script src="Table.js"></script>
 </body>
 </html>
