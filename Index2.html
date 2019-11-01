@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body onload="index22()" onunload="index2()">
+
+
+<script>
+    if(localStorage.getItem("loggedIn") === "true") {
+
+    } else {
+        window.location = "loginPage.html";
+    }
+</script>
+
+
+
+<script>
+    function index22() {
+        localStorage.setItem("item2", "item");
+    }
+</script>
+
+
+<script>
+    function index2() {
+
+        localStorage.removeItem("item2");
+
+        if (localStorage.length<=2) {
+                localStorage.removeItem("loggedIn");
+
+            }
+    }
+</script>
+
+<script src="Validation.js"></script>
+
+<h1>Velkommen</h1>
+<p>Hejsa dette er side 1</p>
+
+
+</body>
+</html>

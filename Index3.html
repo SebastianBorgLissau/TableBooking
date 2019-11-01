@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body onload="index33()" onunload="index3()">
+
+<script>
+    if(localStorage.getItem("loggedIn") === "true") {
+
+    } else {
+        window.location = "loginPage.html";
+    }
+</script>
+
+<script>
+    function index33() {
+        localStorage.setItem("item3", "item");
+    }
+</script>
+
+<script>
+    function index3() {
+
+        localStorage.removeItem("item3");
+
+        if (localStorage.length<=2) {
+            localStorage.removeItem("loggedIn");
+
+        }
+
+    }
+</script>
+<h1>Velkommen</h1>
+<p>Hejsa dette er side 2</p>
+
+</body>
+</html>
