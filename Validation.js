@@ -1,4 +1,11 @@
 
+function currentUser1 () {
+
+    var enteredName1 = document.getElementById("enteredName");
+    localStorage.setItem("current_user", enteredName1.value);
+
+}
+
 
 function checkIfLoginIsCorrect1() {
 
@@ -19,6 +26,7 @@ function checkIfLoginIsCorrect1() {
 
         alert("Email and password correct");
         localStorage.setItem("loggedIn", "true");
+        currentUser1();
         window.location.replace("Index2.html");
         return false;
     }
@@ -40,50 +48,4 @@ function logout() {
 
 }
 
-function index1() {
 
-    localStorage.removeItem("item1");
-
-    if (localStorage.length < 3) {
-        var ms = confirm("Do you really want to leave?");
-
-        if (ms === true) {
-            localStorage.removeItem("loggedIn");
-            window.location.replace("loginPage.html");
-        }
-
-    }
-
-
-}
-
-
-
-function testPages() {
-    // Broad cast that your're opening a page.
-    localStorage.openpages = Date.now();
-
-    var onLocalStorageEvent = function(e){
-        if(e.key == "openpages"){
-            // Listen if anybody else opening the same page!
-            localStorage.page_available = Date.now();
-        }
-        if(e.key == "page_available"){
-
-
-        }
-    };
-    window.addEventListener('storage', onLocalStorageEvent, false);
-
-}
-
-class page {
-    constructor(key, value) {
-        this.key = key;
-        this.value = value;
-
-    }
-}
-
-var page1 = new page(page1, 1);
-var page2 = new page(page2, 2);

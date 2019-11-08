@@ -1,13 +1,19 @@
 
 
+class user {
+    constructor (email, password, phone) {
+        this.email = email;
+        this.password = password;
+        this.phone = phone;
+    }
+}
+
+var courseArray = [];
 
 function addUserInfo () {
-    var courseArray = [];
-    var info = {
-        email: document.getElementById("email").value,
-        password: document.getElementById("password").value,
-        phone: document.getElementById("phoneNumber").value,
-    };
+
+    var info = new user(document.getElementById("email").value,
+        document.getElementById("password").value, document.getElementById("phoneNumber").value);
 
     var check = localStorage.length;
 
@@ -20,6 +26,21 @@ function addUserInfo () {
     var requirementsPhone =/^\d{8}$/;
     var phone = document.getElementById("phoneNumber");
 
+    function storeLogin () {
+        courseArray = JSON.parse(localStorage.getItem("info")) || [];
+
+        courseArray.push(info);
+
+        localStorage.setItem("info", JSON.stringify(courseArray));
+
+        courseArray = localStorage.getItem("info");
+
+        courseArray = JSON.parse(courseArray);
+
+        for (var i = 0; i < courseArray.length; i++) {
+            console.log(courseArray[i]);
+        }
+    }
 
         if(password.value.match(requirementsPassword)) {
             document.getElementById("password").style.border = "none";
@@ -51,64 +72,40 @@ function addUserInfo () {
 
             }
 
-
-
-
     if(password.value.match(requirementsPassword) === null || email.value.match(requirementsEmail) === null || phone.value.match(requirementsPhone) === null)
     {
         return false;
     }
-
 
 if (info.email ==""|| info.password =="" || info.phone =="")
 {
     return false;
 }
 
-
     if (info.email !== "" && info.password !== "" && check === 0) {
 
-        courseArray = JSON.parse(localStorage.getItem("info")) || [];
-
-        courseArray.push(info);
-
-        localStorage.setItem("info", JSON.stringify(courseArray));
-
-        courseArray = localStorage.getItem("info");
-
-        courseArray = JSON.parse(courseArray);
-
-        for (var i = 0; i < courseArray.length; i++) {
-            console.log(courseArray[i]);
-        }
+        storeLogin();
         alert("New user has been created");
-        window.location.replace("Login.html");
+        window.location.replace("loginPage.html");
 
     } else if (info.email !== "" && info.password !== "" &&
         localStorage.getItem("info").indexOf(document.getElementById("email").value) == -1)
     {
-        courseArray = JSON.parse(localStorage.getItem("info")) || [];
-
-        courseArray.push(info);
-
-        localStorage.setItem("info", JSON.stringify(courseArray));
-
-        courseArray = localStorage.getItem("info");
-
-        courseArray = JSON.parse(courseArray);
-
-        for (var j = 0; j < courseArray.length; j++) {
-            console.log(courseArray[j]);
-        }
+        storeLogin();
         alert("New user has been created");
-        window.location = "Index.html";
-
+        window.location.replace("loginPage.html");
 
     } else {
         alert("ERROR: User already exists");
         return false;
     }
 
+}
+
+function currentUser () {
+
+    var cu = document.getElementById("enteredName");
+    localStorage.setItem("currentUser","cu");
 
 }
 

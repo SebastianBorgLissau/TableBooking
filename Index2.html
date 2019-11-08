@@ -11,26 +11,21 @@
     if(localStorage.getItem("loggedIn") === "true") {
 
     } else {
-        window.location = "loginPage.html";
+        window.location.replace("loginPage.html");
     }
-</script>
 
-
-
-<script>
     function index22() {
-        localStorage.setItem("item2", "item");
+        localStorage.setItem("page1", "open");
     }
-</script>
 
-
-<script>
     function index2() {
 
-        localStorage.removeItem("item2");
+        localStorage.removeItem("page1");
 
-        if (localStorage.length<=2) {
+        if (localStorage.length<=3) {
+
                 localStorage.removeItem("loggedIn");
+                localStorage.removeItem("current_user");
 
             }
     }
