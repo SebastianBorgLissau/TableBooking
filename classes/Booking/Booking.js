@@ -100,7 +100,7 @@ function myBookings() {
 
     for(i = 0; i < bookings.length; i++) {
         console.log(bookings[i]);
-
+4
         if (bookings[i].user == inputName) {
             console.log("found");
             bookingArray.push(bookings[i]);

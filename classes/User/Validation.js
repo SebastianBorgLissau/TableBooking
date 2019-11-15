@@ -5,7 +5,6 @@ class currentUser {
 
 }
 
-
 function currentUser1 () {
 
     let index, inputName, currentUserArray,

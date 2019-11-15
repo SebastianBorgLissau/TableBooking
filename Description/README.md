@@ -10,4 +10,4 @@ Requirements here:
 
 
 
-![Alt text](assets/classdiagram.png?raw=true "tableBooking UML Class Diagram")
+![Alt text](classdiagram.png?raw=true "tableBooking UML Class Diagram")
