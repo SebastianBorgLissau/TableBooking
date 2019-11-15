@@ -1,6 +1,5 @@
 //array med borde
 
-
     var table1 = 5;
     var table2 = 8;
     var table3 = 2;
@@ -39,16 +38,14 @@
 
 function findAntalPersoner() {
 
-    //var antalPladser = document.getElementById('seats').value;
-
-    //alert(antalPladser);
-
+    var e = document.getElementById("seats");
+    var antalPladser = e.options[e.selectedIndex].value;
 
     for (var i = 0; i < allTables.length; i++) {
         console.log(allTables[i]);
 
 
-        var findtable = allTables[i] === 7;
+        var findtable = allTables[i] === antalPladser;
 
 
 

@@ -1,6 +1,7 @@
+
+
 function findAntalPersoner() {
-
-    var antalPladser = document.getElementById('antal_pladser').value;
-
-    alert(antalPladser);
+    var e = document.getElementById("seats");
+    var antalpladser = e.options[e.selectedIndex].value;
+    alert(antalpladser);
 }
