@@ -21,9 +21,10 @@
 
         localStorage.removeItem("page2");
 
-        if (localStorage.length<=3) {
+        if (localStorage.length<=5 || localStorage.length<=6) {
             localStorage.removeItem("loggedIn");
             localStorage.removeItem("current_user");
+            localStorage.removeItem("identifier");
 
         }
 

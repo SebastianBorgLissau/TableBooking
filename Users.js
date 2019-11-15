@@ -1,32 +1,43 @@
 
-
 class user {
-    constructor (email, password, phone) {
+    constructor (fullName, email, password, phone) {
+        this.fullName = fullName;
         this.email = email;
         this.password = password;
         this.phone = phone;
     }
+
+    createAlert() {
+        alert("Hi " + document.getElementById("fullName").text + " you have been registered");
+    }
 }
 
-var courseArray = [];
 
 function addUserInfo () {
 
-    var info = new user(document.getElementById("email").value,
+var check, requirementsPassword, password, requirementsEmail, email, requirementsPhone, phone, info;
+
+        check = localStorage.length;
+        requirementsPassword = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)^(?!@)[a-zA-Z\d]{8,}$/;
+        password = document.getElementById("password");
+        requirementsEmail = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+        email = document.getElementById("email");
+        requirementsPhone =/^\d{8}$/;
+        phone = document.getElementById("phoneNumber");
+
+        info = new user(document.getElementById("fullName").value, document.getElementById("email").value,
         document.getElementById("password").value, document.getElementById("phoneNumber").value);
 
-    var check = localStorage.length;
+    function storeLogin (values) {
 
-    var requirementsPassword = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)^(?!@)[a-zA-Z\d]{8,}$/;
-    var password = document.getElementById("password");
-
-    var requirementsEmail = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
-    var email = document.getElementById("email");
-
-    var requirementsPhone =/^\d{8}$/;
-    var phone = document.getElementById("phoneNumber");
-
-    function storeLogin () {
+        values = JSON.parse(localStorage.getItem("info"));
+        if (values === null) {
+            values = [];
+        }
+        values.push(info);
+        localStorage.setItem("info", JSON.stringify(values));
+    }
+        /*
         courseArray = JSON.parse(localStorage.getItem("info")) || [];
 
         courseArray.push(info);
@@ -39,8 +50,15 @@ function addUserInfo () {
 
         for (var i = 0; i < courseArray.length; i++) {
             console.log(courseArray[i]);
+        }*/
+
+        if(document.getElementById("fullName").value !== "") {
+            document.getElementById("fullName").style.border = "none";
+            document.getElementById("fullNameValidation").innerHTML = "";
+        } else {
+            document.getElementById("fullName").style.border = "1px solid red";
+            document.getElementById("fullNameValidation").innerHTML="Please fill out";
         }
-    }
 
         if(password.value.match(requirementsPassword)) {
             document.getElementById("password").style.border = "none";
@@ -77,7 +95,7 @@ function addUserInfo () {
         return false;
     }
 
-if (info.email ==""|| info.password =="" || info.phone =="")
+if (info.email ==""|| info.password =="" || info.phone =="" || info.fullName =="")
 {
     return false;
 }
@@ -93,6 +111,7 @@ if (info.email ==""|| info.password =="" || info.phone =="")
     {
         storeLogin();
         alert("New user has been created");
+        new user().createAlert();
         window.location.replace("loginPage.html");
 
     } else {
@@ -102,10 +121,20 @@ if (info.email ==""|| info.password =="" || info.phone =="")
 
 }
 
-function currentUser () {
 
-    var cu = document.getElementById("enteredName");
-    localStorage.setItem("currentUser","cu");
+class adminUser {
+    constructor (adminUserName, adminPassword) {
+        this.adminUserName = adminUserName;
+        this.adminPassword = adminPassword
+    }
+}
+
+
+var adminUser1 = new adminUser("admin1", "1234");
+
+function AdminUser () {
+    localStorage.setItem("adminUser", JSON.stringify(adminUser1));
 
 }
+
 

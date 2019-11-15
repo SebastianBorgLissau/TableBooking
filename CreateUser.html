@@ -4,15 +4,19 @@
     <meta charset="UTF-8">
     <title>Login form</title>
     <link rel="stylesheet" type="text/css" href="style.css">
+    <script src="Users.js"></script>
 </head>
 <body>
 
-<script src="Users.js"></script>
+
 
 <div class="login-page">
     <div class="form">
         <form class="register-form" name="Form">
             <h1>Create an account</h1>
+
+            <span id = "fullNameValidation" style="color: red"></span>
+            <input id = "fullName" type="text" placeholder="Full name" value=""/>
 
             <span id = "emailValidation" style="color: red"></span>
             <input id = "email" type="email" placeholder="Email" value=""/>
@@ -21,7 +25,9 @@
             <input id ="password" type="password" placeholder="Password" value=""/>
 
             <span id = "phoneValidation" style="color: red"></span>
-            <input id = "phoneNumber" type="text" placeholder="Phone" value=""/>
+            <input id = "phoneNumber" type="text" placeholder="Phone number" value=""/>
+
+
 
 
             <button id="createUserbtn" type="submit" value="Register" onclick="return addUserInfo()">create</button>

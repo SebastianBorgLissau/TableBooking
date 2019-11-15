@@ -72,3 +72,13 @@
 #span {
     color: red;
 }
+
+td {
+    padding: 10px 55px 10px 10px;
+    border-bottom: solid 1px;
+
+}
+
+tr {
+    padding: 10px 55px 10px 10px;
+}
