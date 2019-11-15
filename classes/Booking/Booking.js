@@ -93,14 +93,14 @@ function deleteBooking() {
 }
 
 function myBookings() {
-    var i,
+    let i,
         bookings = JSON.parse(localStorage.getItem("bookings")), //skiftes ud med booking
         inputName =localStorage.getItem("current_user"), //skiftes ud med identifier
         bookingArray = [];
 
     for(i = 0; i < bookings.length; i++) {
         console.log(bookings[i]);
-4
+
         if (bookings[i].user == inputName) {
             console.log("found");
             bookingArray.push(bookings[i]);
@@ -110,9 +110,9 @@ function myBookings() {
         }
     }
 
-    var row, cell, text, r, c,
+    let row, cell, text, r, c,
         prop = ['bookingNumber','seatsChosen', 'date', 'time'], //navne-properties under bookings, som for loop med var c henter værdier fra
-        table = document.getElementById("bookingDIV"),
+        table = document.getElementById("myList1"),
         data = bookingArray;
 
     for (r = 0; r < data.length; r++) {
@@ -131,4 +131,39 @@ function myBookings() {
         //table.appendChild(createTable);
         table.appendChild(row); //indsætter tabel i dokument
     }
+}
+
+
+
+
+function myInformation() {
+    let i,
+        information =JSON.parse(localStorage.getItem("current_user")), //skiftes ud med identifier
+        infoArray = [];
+
+
+
+    let row, cell, text, r, c,
+        prop = ['bookingNumber','seatsChosen', 'date', 'time'], //navne-properties under bookings, som for loop med var c henter værdier fra
+        table = document.getElementById("myList1"),
+        data = bookingArray;
+
+    for (r = 0; r < data.length; r++) {
+        row = document.createElement('tr'); // tr = table rows. Looper over bookingArray og laver rækker for hvert element i arrayet
+
+        //laver 4 celler
+        for (c = 0; c < 4; c++) {
+            //  header = (document.createTextNode(tableHeader[c]));
+
+            cell = document.createElement('td'); //td =table data. Laver celler i tabel
+            text = document.createTextNode(data[r][prop[c]]); //laver række for hvert element: data[r], og inden i rækken laves celler med de værdier der tilhører propertiesene i bookingArray [prop[c]].
+            cell.appendChild(text); //indsætter data i cellen
+            row.appendChild(cell);  //indsætter celler i rækker
+            //table.appendChild(header);
+        }
+        //table.appendChild(createTable);
+        table.appendChild(row); //indsætter tabel i dokument
+    }
+
+
 }
