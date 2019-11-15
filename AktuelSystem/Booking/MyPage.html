@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" type="text/css" href="../../style.css">
+
+</head>
+<body onload="myBookings()">
+<script src="Booking.js"></script>
+
+<h1>Your bookings:</h1>
+
+<div id = bookingDIV>
+
+    <table>
+
+
+
+        <tbody id="myList1">
+        <tr>
+
+            <th data-field="numberOfPersons">Order:</th>
+            <th data-field="numberOfPersons">Persons:</th>
+            <th data-field="dateOfBooking">Date:</th>
+            <th data-field="timeOfBooking">Time:</th>
+
+        </tr>
+        </tbody>
+    </table>
+
+
+
+
+
+</div>
+
+
+</br>
+</br>
+
+
+
+<button onclick = "deleteBooking()">Delete booking</button>
+<input id = "deleteB" placeholder="type in order number">
+
+</br>
+</br>
+<h1>Your information:</h1>
+<table>
+
+
+
+    <tbody id="myInformation">
+    <tr>
+
+        <th data-field="numberOfPersons">Full name</th>
+        <th data-field="numberOfPersons">Email</th>
+        <th data-field="dateOfBooking">Phone:</th>
+
+    </tr>
+    </tbody>
+</table>
+
+</body>
+</html>

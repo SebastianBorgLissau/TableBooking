@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="UTF-8">
+    <title>Login form</title>
+    <link rel="stylesheet" type="text/css" href="../style.css">
+</head>
+<body>
+
+<script src="Validation.js"></script>
+
+<div class="login-page">
+    <div class="form">
+        <form class="register-form">
+            <h1>Login</h1>
+            <input id = "enteredName" type="email" placeholder="E-mail" value=""/>
+            <input id ="enteredPassword" type="password" placeholder="Password" value=""/>
+
+            <div id = sm></div>
+
+            <button id="loginUserbtn" type="submit" onclick="return checkIfLoginIsCorrect1()">login</button>
+
+            <p class="message">&nbsp Not Registered?<a href="CreateUser.html">Register</a> </p>
+        </form>
+
+
+    </div>
+</div>
+
+
+
+</body>
+</html>

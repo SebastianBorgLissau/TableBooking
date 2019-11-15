@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body onload="index33()" onunload="index3()">
+
+<script>
+    if(localStorage.getItem("loggedIn") === "true") {
+    } else {
+        window.location.replace("loginPage.html");
+    }
+    function index33() {
+        localStorage.setItem("page2", "open");
+    }
+    function index3() {
+        localStorage.removeItem("page2");
+        if (localStorage.length<=5 || localStorage.length<=6) {
+            localStorage.removeItem("loggedIn");
+            localStorage.removeItem("current_user");
+            localStorage.removeItem("identifier");
+        }
+    }
+</script>
+<h1>Velkommen</h1>
+<p>Hejsa dette er side 2</p>
+
+</body>
+</html>

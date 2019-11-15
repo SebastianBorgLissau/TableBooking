@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body onload="index22()" onunload="index2()">
+
+
+<script>
+    function index22() {
+        localStorage.setItem("page1", "open");
+    }
+    if(localStorage.getItem("loggedIn") === "true") {
+    } else {
+        window.location.replace("loginPage.html");
+    }
+    function index2() {
+        if (localStorage.length <= 4)
+        {} else {
+            localStorage.removeItem("page1");
+        }
+        if (localStorage.length <= 3) {
+            localStorage.removeItem("loggedIn");
+            localStorage.removeItem("current_user");
+            localStorage.removeItem("identifier");
+        }
+    }
+</script>
+
+<script src="Validation.js"></script>
+
+<h1>Velkommen</h1>
+<p>Hejsa dette er side 1</p>
+
+
+</body>

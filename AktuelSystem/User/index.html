@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+
+
+    <meta charset="UTF-8">
+    <title>This is our website</title>
+</head>
+<body onunload="index1()" onload="index11()" >
+
+<script>
+    if(localStorage.getItem("loggedIn") === "true") {
+    } else {
+        window.location = "loginPage.html";
+    }
+</script>
+
+<script>
+    function index11() {
+        localStorage.setItem("item1", "item");
+    }
+</script>
+
+<script>
+    function index1() {
+        localStorage.removeItem("item1");
+        if (localStorage.length<=2) {
+            localStorage.removeItem("loggedIn");
+        }
+    }
+</script>
+
+
+
+
+<script src="Validation.js"></script>
+
+
+<h1>Welcome to our website</h1>
+<p>You made your way in</p>
+<br>
+<br>
+<br>
+<button onclick="logout()">Log out</button>
+
+
+</body>
+</html>
