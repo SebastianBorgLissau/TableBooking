@@ -1,9 +1,3 @@
-class currentUser {
-    constructor() {
-
-    }
-
-}
 
 function currentUser1 () {
 

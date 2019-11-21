@@ -28,6 +28,8 @@ function addUserInfo () {
     info = new user(document.getElementById("fullName").value, document.getElementById("email").value,
         document.getElementById("password").value, document.getElementById("phoneNumber").value);
 
+    //admin = new user("Admin","admintest@admintest.dk","Admin2019",00000000);
+
     function storeLogin (values) {
 
         values = JSON.parse(localStorage.getItem("info"));
@@ -116,19 +118,4 @@ function addUserInfo () {
 
 }
 
-
-class adminUser {
-    constructor (adminUserName, adminPassword) {
-        this.adminUserName = adminUserName;
-        this.adminPassword = adminPassword
-    }
-}
-
-
-var adminUser1 = new adminUser("admin1", "1234");
-
-function AdminUser () {
-    localStorage.setItem("adminUser", JSON.stringify(adminUser1));
-
-}
 
