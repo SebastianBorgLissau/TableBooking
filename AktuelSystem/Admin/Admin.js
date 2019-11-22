@@ -12,14 +12,14 @@ class adminUser {
 var admin = new adminUser("adminbruger", "admin1234");
 
 //Defines array with all admin users
-//var adminArray = JSON.parse(localStorage.getItem("allAdminUsers"));
-var adminArray = [];
-adminArray.push(admin);
+var adminArray = JSON.parse(localStorage.getItem("allAdminUsers"));
 
-// jeg bør bruge get item før jeg kan set item mwndigi
+//Pushes admin to array
+adminArray.push(admin);
 
 localStorage.setItem("allAdminUsers", JSON.stringify(adminArray));
 
+}
 
 //Push admin user to admin array
 //adminArray.push(admin);
@@ -50,7 +50,7 @@ function checkIfAdminLoginIsCorrect() {
 
     if (AdminInfo.indexOf(document.getElementById("enteredName").value) === -1 || AdminInfo.indexOf(document.getElementById("enteredPassword").value) === -1)
     {
-        alert("Wrong email or password");
+        alert("Wrong username or password");
         return false;
 
     } else {
