@@ -12,7 +12,7 @@
         localStorage.setItem("page1", "open");
     }
 
-    if(localStorage.getItem("loggedIn") === "true") {
+    if(sessionStorage.getItem("loggedIn") === "true") {
 
     } else {
         window.location.replace("loginPage.html");
@@ -35,7 +35,7 @@
     }
 </script>
 
-<script src="Validation.js"></script>
+
 
 <h1>Velkommen</h1>
 <p>Hejsa dette er side 1</p>

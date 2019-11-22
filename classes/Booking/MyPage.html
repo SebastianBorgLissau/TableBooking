@@ -3,10 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
-    <link rel="stylesheet" type="text/css" href="../style.css">
+    <link rel="stylesheet" type="text/css" href="../User/style.css">
 
 </head>
-<body onload="myBookings()">
+<body onload="displayInfo()">
 <script src="Booking.js"></script>
 
 <h1>Your bookings:</h1>
@@ -40,9 +40,12 @@
 </br>
 
 
+<select id="test"></select>
+
+
 
 <button onclick = "deleteBooking()">Delete booking</button>
-<input id = "deleteB" placeholder="type in order number">
+<input id = "deleteB" type="text" placeholder="type in order number">
 
 </br>
 </br>
@@ -61,6 +64,8 @@
     </tr>
     </tbody>
 </table>
+
+
 
 </body>
 </html>
