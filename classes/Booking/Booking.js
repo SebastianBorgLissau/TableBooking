@@ -1,7 +1,7 @@
-/*this is our booking booking class*/
-
+//Defines booking class
 class Booking {
 
+    //Creates constructor with class attributes
     constructor(bookingNumber, seatsChosen, date, time, user) {
 
         this.bookingNumber = bookingNumber;
@@ -10,72 +10,73 @@ class Booking {
         this.time = time;
         this.user = user;
     }
-
+    //Adds method to class, that gets called when a new booking is successful
     bookingAlert() {
         alert("you have made a new booking");
 
     }
 
+    //Adds method to class, that gets called when a deletion of a booking is successfully executed
     bookingAlertDelete () {
         alert("Booking " + document.getElementById("deleteB").value + " succesfully deleted");
     }
 
+    //Adds method to class, that gets called when delete-input is empty
     bookingAlertDeleteEmpty () {
         alert("type the number of the booking you want to delete")
     }
 }
 
 
-
+//Function, that stores a booking in LocalStorage
 function setBooking() {
 
-//numberOfBooking = document.getElementById("deleteB").value;
-
-
-
+    //If statement which prompts a confirmation and returns true/false depending on user input if all conditions of a booking is met.
     if (confirm('Are you sure, you want to make a booking?')) {
         // Save it!
 
+        //Defines booking variable as an object and retrieves items for "Bookings"
         let bookingArray = JSON.parse(localStorage.getItem("bookings"));
 
-        var bookingNumber, seats2, e, date, f, time, userId, bookings, values;
+        //Defines global scope for all variables
+        var bookingNumber, seats, date, timeSelector, time, userId, bookings, values;
 
+        //If statement that assigns a number to a booking and increases by 1 for each booking made
     if (bookingArray == null) {
         bookingNumber = 1;
     } else {
         bookingNumber = bookingArray.length + 1;
     }
-
-        seats2 = document.getElementById("tableSeats").value;
-
-
-
-      //  e = document.getElementById("date");
-        //date = e.options[e.selectedIndex].value;
-
-        //let dateList = document.getElementsByClassName("selected-date");
-        //for(var i = 0; i < dateList.length; i++) {
-          //  console.log(dateList[i].getAttribute('data-value'));
-        //}
-        //date = dateList[0].getAttribute('data-value');
+        //Retrieves user input from HTML page
+        seats = document.getElementById("tableSeats").value;
 
         date = document.getElementById("datestring").innerHTML;
-        f = document.getElementById("time");
-        time = f.options[f.selectedIndex].value;
+
+        timeSelector = document.getElementById("time");
+        time = timeSelector.options[timeSelector.selectedIndex].value;
 
         userId = localStorage.getItem("current_user");
 
+        //Instantiation of new objects for booking class
+        bookings = new Booking(bookingNumber, seats, date, time, userId);
 
-        bookings = new Booking(bookingNumber, seats2, date, time, userId);
-
+        //Defines values variable and retrives data from LocalStorage (Erstat med "BookingArray?)
         values = JSON.parse(localStorage.getItem("bookings"));
+
+        //If statement which checks if LocalStorage item bookings is empty and creates a new empty array.
        if (values === null) {
            values = [];
        }
+       //Pushes values of bookings into empty array
         values.push(bookings);
 
+       //Stores key bookings with the value of values array
         localStorage.setItem("bookings", JSON.stringify(values));
+
+       //Calls method bookingAlert from booking class.
       new Booking().bookingAlert();
+
+      //Redirects to booking confirmation page when booking is created
       window.location.replace("bookingConfirmation.html");
       return false;
         //  alert("new booking made");
