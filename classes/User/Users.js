@@ -1,4 +1,5 @@
 
+//defining a class with a constructor holding attributes with values for the user
 class user {
     constructor (fullName, email, password, phone) {
         this.fullName = fullName;
@@ -6,45 +7,64 @@ class user {
         this.password = password;
         this.phone = phone;
     }
-
+//adding method to class that creates alert when called
     createAlert() {
-        alert("Hi " + document.getElementById("fullName").value + " you have been registered");
+        return "Hi " + document.getElementById("fullName").value + " you have been registered";
     }
 }
 
-function addUserInfo (check, requirementsPassword, password, requirementsEmail, email, requirementsPhone, phone, info) {
+//function that stores userinfo to localstorage. Defines local variables for the function with function parameters
+//variables are only going to be used within the scope of this function, that's why parameters are used to define variables
+function addUserInfo (requirementsPassword, password, requirementsEmail, email, requirementsPhone, phone, info) {
 
-
-
-        check = localStorage.length;
-        requirementsPassword = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)^(?!@)[a-zA-Z\d]{8,}$/;
-        password = document.getElementById("password");
-        requirementsEmail = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
-        email = document.getElementById("email");
-        requirementsPhone =/^\d{8}$/;
-        phone = document.getElementById("phoneNumber");
-
+       // Instantiates a new class of the type user and fetches object values from the html input
         info = new user(document.getElementById("fullName").value, document.getElementById("email").value,
         document.getElementById("password").value, document.getElementById("phoneNumber").value);
 
+
+
+        //function that stores the user info into an array in localstorage
     function storeLogin (values) {
 
+        //defining a binding. Getting the key info from localstorage and uses  parses it as objects instead of a string
         values = JSON.parse(localStorage.getItem("info"));
+
+        //If statement that checks if LocalStorage item bookings does not exist and reassigns values to an empty array.
+        //in this way we prevents javascript from overwriting data in our array in localstorage by only making a new array if bookings does not exist
+        //consequently we are utilizing our existing values array to store more more objects in it
         if (values === null) {
             values = [];
         }
+        //Pushes values of localstorage item bookings into empty array
         values.push(info);
+        //stores values of values array to local storage and sets assigns key info to the array
         localStorage.setItem("info", JSON.stringify(values));
     }
+
+
+    password = document.getElementById("password");
+    email = document.getElementById("email");
+    phone = document.getElementById("phoneNumber");
+
+    //Regular expressions are patterns used to match character combinations in strings
+    //defining regular expressions. If the user password does not match these expressions, it returns null
+    requirementsPassword = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)^(?!@)[a-zA-Z\d]{8,}$/;
+    requirementsEmail = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+    requirementsPhone =/^\d{8}$/;
+    //defining if statements to check for empty or if input values match requirements
+    //using the HTML DOM style object with property border to style input border red if input values does not match requirements.
 
         if(document.getElementById("fullName").value !== "") {
             document.getElementById("fullName").style.border = "none";
             document.getElementById("fullNameValidation").innerHTML = "";
         } else {
             document.getElementById("fullName").style.border = "1px solid red";
+
+            //Using the HMTL DOM property innerHTML to append text within quotation marks to HTML element if if statement evaluates to false
             document.getElementById("fullNameValidation").innerHTML="Please fill out";
         }
 
+        //using the inbuilt method element.match to check if the password contains the specified requirements.
         if(password.value.match(requirementsPassword)) {
             document.getElementById("password").style.border = "none";
             document.getElementById("passwordValidation").innerHTML = "";
@@ -72,122 +92,126 @@ function addUserInfo (check, requirementsPassword, password, requirementsEmail, 
             } else {
                 document.getElementById("phoneValidation").innerHTML ="Please enter valid phone number";
                 document.getElementById("phoneNumber").style.border = "1px solid red";
-
             }
 
+//returns false on submit if any of the user inputs dont match the specified requirements.
+//Prevents users to get access to the system in case of login fall
     if(password.value.match(requirementsPassword) === null || email.value.match(requirementsEmail) === null || phone.value.match(requirementsPhone) === null)
     {
         return false;
     }
 
+    //returns false on submit if any of the user inputs is empty.
 if (info.email ==""|| info.password =="" || info.phone =="" || info.fullName =="")
 {
     return false;
 }
 
-    if (info.email !== "" && info.password !== "" && check === 0) {
-
+//Creates a new user if localstorage is empty. If no user has been created there is no chance for duplicates
+    if (localStorage.length === 0) {
         storeLogin();
-        alert("New user has been created");
+
+        //calling class method and alerting it
+        alert(new user().createAlert());
+
+        //using window object with location property and replace method to redirect user to html page
+        //the user should not be able return to login page when successfully logged in, that's why we use replace method.
         window.location.replace("loginPage.html");
 
-    } else if (info.email !== "" && info.password !== "" &&
-        localStorage.getItem("info").indexOf(document.getElementById("email").value) == -1)
-    {
-        storeLogin();
-        new user().createAlert();
-        window.location.replace("loginPage.html");
-        return false;
-
-    } else {
-        alert("ERROR: User already exists");
+        //return false statement prevents form from submitting without waiting for response of function
         return false;
     }
 
+    //using else if statement to specify a new condition to test if the first condition is false.
+        //using indexOf method to test if input email already is present in user array in localstorage
+    else if (localStorage.getItem("info").indexOf(document.getElementById("email").value) === -1) {
+            storeLogin();
+
+            //calling user class method and alerting it
+            alert(new user().createAlert());
+            window.location.replace("loginPage.html");
+            return false;
+
+        } else {
+            alert("ERROR: email already being used");
+            return false;
+        }
 }
 
+
+//function that checks if email and password is correct on login
 function checkIfLoginIsCorrect1(userArray, username, password) {
 
+    //getting values from HTML
         userArray = JSON.parse(localStorage.getItem("info"));
         username = document.getElementById("enteredName").value;
         password = document.getElementById("enteredPassword").value;
 
+        //if statements checks if localstorage is empty
     if (localStorage.length === 0) {
         alert("User not registered");
         return false;
     }
 
+    //checking for empty input fields
     if (username == "" || password == "") {
         alert("please fill out all forms");
         return false;
     }
 
-
+//using for loop to iterate through userArray and console logging array properties email and password to see if we get the correct values
     for (var i = 0; i < userArray.length; i++) {
         console.log(userArray[i].email);
         console.log(userArray[i].password);
 
+        //using if statement to check if user input and password input matches values in localstorage array
+        //using variable i as an index to access array properties email and password
         if (username == userArray[i].email && password == userArray[i].password) {
-            alert("Email and password correct");
-            currentUser1();
+            console.log("email and password correct");
+            currentUser();
             window.location.replace("Index2.html");
             return false;
         }
     }
     alert("wrong email or password");
     return false;
-
 }
 
-
+//using confirm method to return either true or false depending on user input in the event of log out button clicked
 function logout() {
-
-    var lg = confirm("Are you sure you want to log out?");
-
-    if(lg === true) {
-        localStorage.removeItem("loggedIn");
+    if(confirm("Are you sure you want to log out?")) {
+        sessionStorage.removeItem("loggedIn");
+        localStorage.removeItem("currentUser");
         window.location.replace("loginPage.html");
-        // window.location = "loginPage.html";
-
-    } else {
         return false;
     }
-
 }
 
-class adminUser {
-    constructor (adminUserName, adminPassword) {
-        this.adminUserName = adminUserName;
-        this.adminPassword = adminPassword
-    }
-}
-
-
-var adminUser1 = new adminUser("admin1", "1234");
-
-function AdminUser () {
-    localStorage.setItem("adminUser", JSON.stringify(adminUser1));
-
-}
-
-
-
-function currentUser1 () {
-
+//function that creates an array in localstorage that stores the user property of our userArray as an object in localstorage
+function currentUser () {
     let index, inputName, currentUserArray,
         info = JSON.parse(localStorage.getItem("info"));
     inputName = document.getElementById("enteredName").value;
+    //defining empty array to push user information to
     currentUserArray = [];
 
+    //The findIndex() method executes the function once for each element present in the array
+    // it's the same as: info.findIndex(function(x) { return x.email == "inputName" }). the "=>" defines a new function wth the parameter "X"
+    //If it finds an array element where the function returns a true value
+    // findIndex() returns the index of that array element (and does not check the remaining values);
+    //we only need to find that one user in localstorage that logs in, that's why dont need a for loop to iterate through all values
     index = info.findIndex(x => x.email === inputName);
-    // it's the same as: function(x) { return x.prop2 == "inputName" }
-
     console.log(info[index]);
 
+    //using the method push to push values of true index to array
     currentUserArray.push(info[index]);
+
 
     localStorage.setItem("current_user", JSON.stringify(currentUserArray));
     //localStorage.setItem("identifier", inputName);
+
+    //sets key loggedIn with the value true, so inline script in index html can check for logged in
+    //using sessionstorage in stead of localstorage to automatically remove loggedIn if browser tab is closed
     sessionStorage.setItem("loggedIn", "true");
 }
 

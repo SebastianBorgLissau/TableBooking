@@ -19,6 +19,7 @@ adminArray.push(admin);
 
 localStorage.setItem("allAdminUsers", JSON.stringify(adminArray));
 
+
 //Push admin user to admin array
 //adminArray.push(admin);
 

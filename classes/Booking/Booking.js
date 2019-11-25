@@ -30,32 +30,39 @@ class Booking {
 
 //Function, that stores a booking in LocalStorage
 function setBooking() {
+    let bookingArray = JSON.parse(localStorage.getItem("bookings"));
+
+    //Defines global scope for all variables
+    var bookingNumber, seats, date, timeSelector, time, userId, bookings, values;
+
+    //If statement that assigns a number to a booking and increases by 1 for each booking made
+    if (bookingArray == null) {
+        bookingNumber = 1;
+    } else {
+        bookingNumber = bookingArray.length + 1;
+    }
+    //Retrieves user input from HTML page
+    seats = document.getElementById("tableSeats").value;
+
+    date = document.getElementById("datestring").innerHTML;
+
+    timeSelector = document.getElementById("time");
+    time = timeSelector.options[timeSelector.selectedIndex].value;
+
+    if(time === undefined) {
+        alert("please select time");
+        return false;
+    }
+
+    userId = localStorage.getItem("current_user");
+
 
     //If statement which prompts a confirmation and returns true/false depending on user input if all conditions of a booking is met.
     if (confirm('Are you sure, you want to make a booking?')) {
         // Save it!
 
         //Defines booking variable as an object and retrieves items for "Bookings"
-        let bookingArray = JSON.parse(localStorage.getItem("bookings"));
 
-        //Defines global scope for all variables
-        var bookingNumber, seats, date, timeSelector, time, userId, bookings, values;
-
-        //If statement that assigns a number to a booking and increases by 1 for each booking made
-    if (bookingArray == null) {
-        bookingNumber = 1;
-    } else {
-        bookingNumber = bookingArray.length + 1;
-    }
-        //Retrieves user input from HTML page
-        seats = document.getElementById("tableSeats").value;
-
-        date = document.getElementById("datestring").innerHTML;
-
-        timeSelector = document.getElementById("time");
-        time = timeSelector.options[timeSelector.selectedIndex].value;
-
-        userId = localStorage.getItem("current_user");
 
         //Instantiation of new objects for booking class
         bookings = new Booking(bookingNumber, seats, date, time, userId);
@@ -87,7 +94,6 @@ function deleteBooking() {
 
 
         let bookings = JSON.parse(localStorage.getItem("bookings"));
-        // let inputName = prompt("Type in the number of the booking you want to delete");
         let iName = document.getElementById("deleteB").value;
         let user = localStorage.getItem("current_user");
         let indexArray = [];
@@ -105,6 +111,7 @@ function deleteBooking() {
                 option.value = bookings[i];
                 option.innerHTML = bookings[i];
                 select.appendChild(option);
+
 
             } else {
                 console.log("not found")
