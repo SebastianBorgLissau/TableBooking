@@ -6,6 +6,7 @@ const mth_element = document.querySelector('.date-picker .dates .month .mth');
 const next_mth_element = document.querySelector('.date-picker .dates .month .next-mth');
 const prev_mth_element = document.querySelector('.date-picker .dates .month .prev-mth');
 const days_element = document.querySelector('.date-picker .dates .days');
+const body = document.querySelector('body');
 
 const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
 
@@ -120,15 +121,44 @@ function populateDates () {
 
 // using switch to alter the amount of days depending on each month
     // more effective than creating 5 if statements
-switch (month) {
-    case 1: amount_days = 28; break;
-    case 3:
-    case 5:
-    case 8:
-    case 10: amount_days = 30; break;
-}
+
+//    amount_days = day-amount_days;
+
+
+    switch (month) {
+        case 1:
+            amount_days = 28;
+            break;
+        case 3:
+        case 5:
+        case 8:
+        case 10:
+            amount_days = 30;
+            break;
+        case month:
+
+    }
+
+
+// prevents user to pick a date in the past
+    days_element.addEventListener('click', () => {
+
+        let todaysDate = new Date();
+        let todaysMonth = todaysDate.getMonth();
+        if (month == todaysMonth) {
+
+            if (selectedDay < day){
+
+                alert("Sorry. You cannot pick a date in the past");
+                selectedDay = day;
+                location.reload();
+
+            }
+        }
+    });
 
     for (let i = 0; i < amount_days; i++) {
+
 
         // creating div for each day in month
         const day_element = document.createElement('div');
@@ -183,6 +213,8 @@ function formatDate (d) {
 
     // Returns date formatted with forward slashes
     return day + ' / ' + month + ' / ' + year;
+
 }
 
 //https://www.youtube.com/watch?v=wY2dao1hJms&t=1962s
+

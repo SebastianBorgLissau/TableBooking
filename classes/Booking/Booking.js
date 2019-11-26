@@ -98,8 +98,6 @@ function deleteBooking() {
         let user = localStorage.getItem("current_user");
         let indexArray = [];
 
-    var select = document.getElementById("test");
-
 
         for (var i = 0; i < bookings.length; i++) {
             console.log(bookings[i]);
@@ -107,24 +105,12 @@ function deleteBooking() {
             if (bookings[i].bookingNumber == iName) {
                 console.log("found");
                 indexArray.push(bookings[i]);
-                var option = document.createElement("option");
-                option.value = bookings[i];
-                option.innerHTML = bookings[i];
-                select.appendChild(option);
 
 
             } else {
                 console.log("not found")
             }
         }
-
-
-function displayBookingsToDelete() {
-
-
-}
-
-
 
         // var yb = bookings.findIndex (x => x.user == user);
         var ib = bookings.findIndex(x => x.bookingNumber == iName);

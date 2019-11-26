@@ -3,11 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
-    <link rel="stylesheet" type="text/css" href="../User/Admin/style.css">
+    <link rel="stylesheet" type="text/css" href="Admin/style.css">
+    <script>
+        if (sessionStorage.getItem("loggedIn") === "true") {
 
+        } else {
+            window.location.replace("loginPage.html");
+        }
+    </script>
 </head>
 <body onload="displayInfo()">
-<script src="Booking.js"></script>
+<script src="../Booking/Booking.js"></script>
 
 <h1>Your bookings:</h1>
 
@@ -40,7 +46,7 @@
 </br>
 
 
-<select id="test"></select>
+
 
 
 
@@ -65,7 +71,8 @@
     </tbody>
 </table>
 
-
-
+<br>
+<br>
+<a href="Index2.html">Back to menu</a>
 </body>
 </html>

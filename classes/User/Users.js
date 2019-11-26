@@ -181,7 +181,7 @@ function checkIfLoginIsCorrect1(userArray, username, password) {
 function logout() {
     if(confirm("Are you sure you want to log out?")) {
         sessionStorage.removeItem("loggedIn");
-        localStorage.removeItem("currentUser");
+        localStorage.removeItem("current_user");
         window.location.replace("loginPage.html");
         return false;
     }

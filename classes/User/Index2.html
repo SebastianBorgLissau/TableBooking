@@ -3,42 +3,37 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
-</head>
-<body onload="index22()" onunload="index2()">
+    <script src="Users.js"></script>
+    <script>
+        if (sessionStorage.getItem("loggedIn") === "true") {
 
-
-<script>
-    function index22() {
-        localStorage.setItem("page1", "open");
-    }
-
-    if(sessionStorage.getItem("loggedIn") === "true") {
-
-    } else {
-        window.location.replace("loginPage.html");
-    }
-
-    function index2() {
-
-        if (localStorage.length <= 4)
-        {} else {
-            localStorage.removeItem("page1");
+        } else {
+            window.location.replace("loginPage.html");
         }
-
-        if (localStorage.length <= 3) {
-
-                localStorage.removeItem("loggedIn");
-                localStorage.removeItem("current_user");
-                localStorage.removeItem("identifier");
-
-            }
-    }
-</script>
+    </script>
+</head>
+<body>
 
 
 
 <h1>Velkommen</h1>
-<p>Hejsa dette er side 1</p>
+<p>Her kan du se din information og foretage en booking</p>
+
+<h2>Menu</h2>
+
+<a href="MyPage.html">Check your information and bookings</a>
+<br>
+<br>
+<a href="BookingPage.html">Make a booking</a>
+<br>
+<br>
+<button type="submit" onclick="logout()">Log out</button>
+
+
+
+
+
+
 
 
 </body>
