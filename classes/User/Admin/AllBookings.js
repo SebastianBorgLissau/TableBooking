@@ -104,3 +104,5 @@ function displayInfo() {
     allInformation();
     allBookings();
 }
+
+//checking if push works
