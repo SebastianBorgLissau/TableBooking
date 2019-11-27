@@ -1,75 +1,106 @@
+//Functions which is to output all user made bookings for the admin to see
+function allBookings() {
 
-function myBookings() {
-    var bookings = JSON.parse(localStorage.getItem("bookings")); //skiftes ud med booking
+    //Defines variable bookings and retrieves booking data from localstorage with the method getItem() and the JSON parse() method
+    var bookings = JSON.parse(localStorage.getItem("bookings"));
+
+    //Creates empty array
     var bookingArray = [];
 
-
+    //For loop which loops over all bookings and pushes these bookings into the empty newly created array
     for(var i = 0; i < bookings.length; i++) {
-
         console.log(bookings[i]);
         bookingArray.push(bookings[i]);
 
     }
 
-    //console.log();
+    //Defines the elements for a table, that is to show all booking info
+    let row, cell, text, rowSize, columnSize,
 
-    let row, cell, text, r, c,
-        prop = ['bookingNumber','seatsChosen', 'date', 'time','user'], //navne-properties under bookings, som for loop med var c henter værdier fra
-        table = document.getElementById("myList1"),
+        //Defines properties which are objects in the booking class
+        properties = ['bookingNumber','seatsChosen', 'date', 'time','user'],
+
+        //Defines the table as a DIV in html
+        table = document.getElementById("adminTable"),
         data = bookingArray;
 
-    for (r = 0; r < data.length; r++) {
-        row = document.createElement('tr'); // tr = table rows. Looper over bookingArray og laver rækker for hvert element i arrayet
+    //For loop which loops over the booking and creates a row for each element represented in the array
+    for (rowSize = 0; rowSize < data.length; rowSize++) {
 
-        //laver 4 celler
-        for (c = 0; c < 5; c++) {
-            //  header = (document.createTextNode(tableHeader[c]));
+        //We use the .createElement method to create the rows in our html.
+        row = document.createElement('tr');
 
-            cell = document.createElement('td'); //td =table data. Laver celler i tabel
-            text = document.createTextNode(data[r][prop[c]]); //laver række for hvert element: data[r], og inden i rækken laves celler med de værdier der tilhører propertiesene i bookingArray [prop[c]].
+        //For loop which loops over the 5 properties defined in the function
+        for (columnSize = 0; columnSize < 5; columnSize++) {
+
+            //Creates the cells in our html once using the .createElement method
+            cell = document.createElement('td');
+
+            //Creates a row for each element in our booking array and creates cells with the information for the properties
+            text = document.createTextNode(data[rowSize][properties[columnSize]]);
+
+            //Uses the method .appendChild to insert the data to the cells
             cell.appendChild(text); //indsætter data i cellen
+
+            //Inserts the cells into the rows
             row.appendChild(cell);  //indsætter celler i rækker
-            //table.appendChild(header);
+
         }
-        //table.appendChild(createTable);
-        table.appendChild(row); //indsætter tabel i dokument
+        //Creates the final table by inserting the rows into table
+        table.appendChild(row);
     }
 }
 
-function myInformation() {
-    let information = JSON.parse(localStorage.getItem("info")), //skiftes ud med identifier
-        infoArray = [];
+//Functions which is to output all users in the system for the admin to see
+function allInformation() {
 
+    //Defines information as the users in local storage. We use the JSON method .parse to objectify the string stored in localstorage
+    let information = JSON.parse(localStorage.getItem("info")),
+
+        //Creates an empty array for users
+        userArray = [];
+
+    //For loop which loops over the user array and pushes each user into the array
     for(var i = 0;i < information.length; i++) {
-        infoArray.push(information[i]);
+        userArray.push(information[i]);
     }
 
 
+    //Defines the elements for a table, that is to show all booking info
+    let row, cell, text, rowSize, columnSize,
 
-    let row, cell, text, r, c,
-        prop = ['fullName', "email", "phone"], //navne-properties under bookings, som for loop med var c henter værdier fra
+        //Defines properties which are objects in the user class
+        properties = ['fullName', "email", "phone"],
         table = document.getElementById("myInformation"),
-        data = infoArray;
+        data = userArray;
 
-    for (r = 0; r < data.length; r++) {
-        row = document.createElement('tr'); // tr = table rows. Looper over bookingArray og laver rækker for hvert element i arrayet
+    //For loop which loops over the userArray  and creates a row for each element represented in the array
+    for (rowSize = 0; rowSize < data.length; rowSize++) {
+        row = document.createElement('tr');
 
-        //laver 3 celler
-        for (c = 0; c < 3; c++) {
-            //  header = (document.createTextNode(tableHeader[c]));
+        //For loop which loops over the 3 properties defined in the function
+        for (columnSize = 0; columnSize < 3; columnSize++) {
 
-            cell = document.createElement('td'); //td =table data. Laver celler i tabel
-            text = document.createTextNode(data[r][prop[c]]); //laver række for hvert element: data[r], og inden i rækken laves celler med de værdier der tilhører propertiesene i bookingArray [prop[c]].
-            cell.appendChild(text); //indsætter data i cellen
-            row.appendChild(cell);  //indsætter celler i rækker
-            //table.appendChild(header);
+            //Creates the cells in our html once using the .createElement method
+            cell = document.createElement('td');
+
+            //Creates a row for each element in our booking array and creates cells with the information for the properties
+            text = document.createTextNode(data[rowSize][properties[columnSize]]);
+
+            //Uses the method .appendChild to insert the data to the cells
+            cell.appendChild(text);
+
+            //Inserts the cells into the rows
+            row.appendChild(cell);
+
         }
-        //table.appendChild(createTable);
-        table.appendChild(row); //indsætter tabel i dokument
+        //Creates the final table by inserting the rows into table
+        table.appendChild(row);
     }
 }
 
+//Creates new function displayInfo which executes when loading the html page
 function displayInfo() {
-    myInformation();
-    myBookings();
+    allInformation();
+    allBookings();
 }

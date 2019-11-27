@@ -8,99 +8,61 @@ class adminUser {
     }
 }
 
-//Creates Admin as a predefined user
-var admin = new adminUser("adminbruger", "admin1234");
+//Creates Admin as a predefined user as an instance of the class adminUser
+var adminBruger = new adminUser("admin", "1234");
 
-//Defines array with all admin users
-var adminArray = JSON.parse(localStorage.getItem("allAdminUsers"));
+//Uses Console.log which checks if admin is defined correctly
+console.log("Admin username is: " + adminBruger.adminUsername + " with password: " + adminBruger.adminPassword);
 
-//Pushes admin to array
-adminArray.push(admin);
+//Function which is to store login information for the predefined admin user in localstorage
+function storeLogin() {
+    //Defines AdminArray as an empty array
+    var adminArray = [];
 
-localStorage.setItem("allAdminUsers", JSON.stringify(adminArray));
+    //Pushes user adminBruger to AdminArray
+    adminArray.push(adminBruger);
+
+    //Console logs the adminArray to check if the admin-user is pushed to array correctly
+    console.log(adminArray);
+
+//Stores admin array in local storage with key "AdminUsers" as a string using the .setItem() method
+//Uses the .stringify() method to change the array to a string before storing
+    localStorage.setItem("AdminUsers", JSON.stringify(adminArray));
+
+}
 
 
-//Push admin user to admin array
-//adminArray.push(admin);
+//Function which is to check if Admin Login input is correct
+function checkIfAdminLoginIsCorrect(adminInfo, adminUsername, adminPassword) {
 
-//Console log to view if admin is pushed to array correctly.
-//console.log(adminArray);
+    //Defines AdminInfo as a variable with the content of set key "AdminUsers" containing the admin users
+    //Uses JSON.parse method to parse stored string and returns a JS object
+    adminInfo = JSON.parse(localStorage.getItem("AdminUsers"));
 
-//Console.log which checks if admin is defined correctly
-console.log(document.getElementById("demo").innerHTML = "Admin username and password is " + admin.adminUsername + admin.adminPassword);
+    //Defines Username and Password as the input from HTML as a value
+    adminUsername = document.getElementById("nameInput").value;
+    adminPassword = document.getElementById("passwordInput").value;
 
-
-
-
-function checkIfAdminLoginIsCorrect() {
-
-    var LScheck = localStorage.length;
-    var AdminInfo = localStorage.getItem("allAdminUsers");
-
-    if(LScheck === 0) {
-        alert("User not registered");
-        return false;
-    }
-
-    if(document.getElementById("enteredPassword").value == "" || document.getElementById("enteredName").value == "") {
+    //If statement which checks if inputs for password and username is empty and alerts to user if so.
+    if (adminUsername === "" || adminPassword === "") {
         alert("please fill out all forms");
         return false;
     }
 
-    if (AdminInfo.indexOf(document.getElementById("enteredName").value) === -1 || AdminInfo.indexOf(document.getElementById("enteredPassword").value) === -1)
-    {
-        alert("Wrong username or password");
-        return false;
+    //As adminInfo acts as an array and we only have one user - we search for the item 0 in the array
+    //Console.logs to check if the program is able to retrieve relevant information for following if statement
+    console.log(adminInfo[0].adminUsername);
+    console.log(adminInfo[0].adminPassword);
 
-    } else {
-
-        alert("Email and password correct");
-        localStorage.setItem("loggedIn", "true");
+    // If statement which checks if user login input is the same as the predefined admin-user
+    if (adminUsername === adminInfo[0].adminUsername && adminPassword === adminInfo[0].adminPassword) {
+        alert("Username and password correct");
         window.location.replace("AdminPage.html");
         return false;
     }
-}
 
-/*
-function storeLogin (values) {
-    values = JSON.parse(localStorage.getItem("adminKey"));
-    if (values === null) {
-        values = [];
-    }
-    values.push(values);
-    localStorage.setItem("adminKey", JSON.stringify(values));
+    //Else statement which alerts that the user-input does not correspond to values for predefined user
+    else(alert("wrong username or password"));
+    return false;
+
 }
-storeLogin();
-function checkIfLoginIsCorrect() {
-    var check = localStorage.length;
-    var adminInfo = localStorage.getItem("admin");
-    if(check === 0) {
-        alert("User not registered");
-        return false;
-    }
-    if(document.getElementById("enteredPassword").value == "" || document.getElementById("enteredName").value == "") {
-        alert("please fill out all forms");
-        return false;
-    }
-    if (adminInfo.indexOf(document.getElementById("enteredName").value) === -1 || info.indexOf(document.getElementById("enteredPassword").value) === -1)
-    {
-        alert("Wrong email or password");
-        return false;
-    } else {
-        alert("Email and password correct");
-        localStorage.setItem("loggedIn", "true");
-        //currentUser1();
-        window.location.replace("AdminPage.html");
-        return false;
-    }
-}
-function logout() {
-    var lg = confirm("Are you sure you want to log out?");
-    if(lg === true) {
-        localStorage.removeItem("loggedIn");
-        window.location.replace("loginPage.html");
-        // window.location = "loginPage.html";
-    } else {
-        return false;
-    }
-}*/

@@ -92,49 +92,63 @@ function setBooking() {
 
 function deleteBooking() {
 
-
         let bookings = JSON.parse(localStorage.getItem("bookings"));
         let iName = document.getElementById("deleteB").value;
         let user = localStorage.getItem("current_user");
         let indexArray = [];
 
-
+        // laver for som looper over alle bookings i booking arrayet
         for (var i = 0; i < bookings.length; i++) {
             console.log(bookings[i]);
 
+            // hvis en booking er lig det indtastede bookingnummer, bliver denne booking pushet til indexarrayet
             if (bookings[i].bookingNumber == iName) {
                 console.log("found");
                 indexArray.push(bookings[i]);
-
-
             } else {
                 console.log("not found")
             }
         }
 
-        // var yb = bookings.findIndex (x => x.user == user);
+        // using findIndex method, and defining a function with the parameter x.
+    // iterating through object properties of bookingNumber and compares them to input number of the booking the user wants to delete
         var ib = bookings.findIndex(x => x.bookingNumber == iName);
+
+        // searches for the user inside the array containing the bookings of the specific user.
+    // prevents the current user from deleting another users order
         var ob = indexArray.findIndex(x => x.user == user);
 
-
+// Checks for empty input in the event of clicking the delete button
         if (iName == "") {
             new Booking().bookingAlertDeleteEmpty();
-            //alert("type the number of the booking you want to delete");
             return false;
         }
 
+        // checks if the booking number in the booking array exists
         if (ib === undefined) {
             alert("you have no bookings");
             return false;
         }
 
+        // checks if booking number exists in the booking array, and if the user has made the booking connected to the bookingnumber
         if (ib !== -1 && ob !== -1) {
+
+            // Nested if statement if first condition is true.
             if (confirm("Are you sure you want to delete booking " + document.getElementById("deleteB").value+"?")) {
+
                 console.log(ib);
+
+                // using method splice to remove the object element in the array with the input booking number, and returns the new array
+                // The 1 means that you are removing one element from the array
                 bookings.splice(ib, 1);
+
+                // storing the new updated booking array to localstorage
                 localStorage.setItem('bookings', JSON.stringify(bookings));
-                // alert("booking successfully deleted");
+
+                // alerting on succesfull delete
                 new Booking().bookingAlertDelete();
+
+                // refreshing the page so the user can see that the order has been deleted
                 location.reload();
             }
         } else {
@@ -145,8 +159,8 @@ function deleteBooking() {
 
 function myBookings() {
     let i,
-        bookings = JSON.parse(localStorage.getItem("bookings")), //skiftes ud med booking
-        inputName =localStorage.getItem("current_user"), //skiftes ud med identifier
+        bookings = JSON.parse(localStorage.getItem("bookings")),
+        inputName =localStorage.getItem("current_user"),
         bookingArray = [];
 
     for(i = 0; i < bookings.length; i++) {
@@ -161,28 +175,37 @@ function myBookings() {
     }
 
     let row, cell, text, r, c,
-        prop = ['bookingNumber','seatsChosen', 'date', 'time'], //navne-properties under bookings, som for loop med var c henter værdier fra
+
+        // properties under bookings, som for loop med var c henter værdier fra
+        prop = ['bookingNumber','seatsChosen', 'date', 'time'],
         table = document.getElementById("myList1"),
         data = bookingArray;
 
     for (r = 0; r < data.length; r++) {
-        row = document.createElement('tr'); // tr = table rows. Looper over bookingArray og laver rækker for hvert element i arrayet
+
+        // tr = table rows. Looper over bookingArray og laver rækker for hvert element i arrayet
+        row = document.createElement('tr');
 
         //laver 4 celler
         for (c = 0; c < 4; c++) {
-            //  header = (document.createTextNode(tableHeader[c]));
 
-            cell = document.createElement('td'); //td =table data. Laver celler i tabel
-            text = document.createTextNode(data[r][prop[c]]); //laver række for hvert element: data[r], og inden i rækken laves celler med de værdier der tilhører propertiesene i bookingArray [prop[c]].
-            cell.appendChild(text); //indsætter data i cellen
-            row.appendChild(cell);  //indsætter celler i rækker
-            //table.appendChild(header);
+            //td =table data. Laver celler i tabel
+            cell = document.createElement('td');
+
+            //laver række for hvert element: data[r], og inden i rækken laves celler med de værdier der tilhører propertiesene i bookingArray [prop[c]].
+            text = document.createTextNode(data[r][prop[c]]);
+
+            //indsætter data i cellen
+            cell.appendChild(text);
+
+            //indsætter celler i rækker
+            row.appendChild(cell);
         }
-        //table.appendChild(createTable);
-        table.appendChild(row); //indsætter tabel i dokument
+
+        //indsætter tabel i dokument
+        table.appendChild(row);
     }
 }
-
 
 function myInformation() {
     let information =JSON.parse(localStorage.getItem("current_user")), //skiftes ud med identifier
@@ -191,28 +214,39 @@ function myInformation() {
     infoArray.push(information[0]);
 
     let row, cell, text, r, c,
-        prop = ['fullName', "email", "phone"], //navne-properties under bookings, som for loop med var c henter værdier fra
+        //properties under user, som for loop med variabel c henter værdier fra
+        prop = ['fullName', "email", "phone"],
         table = document.getElementById("myInformation"),
         data = infoArray;
 
     for (r = 0; r < data.length; r++) {
-        row = document.createElement('tr'); // tr = table rows. Looper over bookingArray og laver rækker for hvert element i arrayet
+
+        // tr = table rows. Looper over bookingArray og laver rækker for hvert element i arrayet
+        row = document.createElement('tr');
 
         //laver 3 celler
         for (c = 0; c < 3; c++) {
-            //  header = (document.createTextNode(tableHeader[c]));
 
-            cell = document.createElement('td'); //td =table data. Laver celler i tabel
-            text = document.createTextNode(data[r][prop[c]]); //laver række for hvert element: data[r], og inden i rækken laves celler med de værdier der tilhører propertiesene i bookingArray [prop[c]].
-            cell.appendChild(text); //indsætter data i cellen
-            row.appendChild(cell);  //indsætter celler i rækker
+            //td =table data. Laver celler i tabel
+            cell = document.createElement('td');
+
+            //laver række for hvert element: data[r], og inden i rækken laves celler med de værdier der tilhører propertiesene i bookingArray [prop[c]].
+            text = document.createTextNode(data[r][prop[c]]);
+
+            //indsætter data i cellen
+            cell.appendChild(text);
+
+            //indsætter celler i rækker
+            row.appendChild(cell);
             //table.appendChild(header);
         }
-        //table.appendChild(createTable);
-        table.appendChild(row); //indsætter tabel i dokument
+
+        //indsætter tabel i dokument
+        table.appendChild(row);
     }
 }
 
+// samler functionerne i en, som bliver eksekveret når side loader
 function displayInfo() {
     myInformation();
     myBookings();
